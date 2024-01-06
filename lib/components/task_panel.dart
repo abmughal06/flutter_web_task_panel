@@ -1,35 +1,21 @@
-import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:web_duplicate_app/components/custom_button.dart';
+import 'package:web_duplicate_app/components/custom_checkbox.dart';
 import 'package:web_duplicate_app/components/custom_dropdown.dart';
+import 'package:web_duplicate_app/components/custom_expansion_tile.dart';
 import 'package:web_duplicate_app/components/empty_box.dart';
-import 'package:web_duplicate_app/components/text_field.dart';
+import 'package:web_duplicate_app/components/task_counter.dart';
 import 'package:web_duplicate_app/components/text_widget.dart';
 import 'package:web_duplicate_app/constants.dart';
 
-// List choiceIcon = [icLocation, icCheckList, icDeadline];
-
-// List choiceText = ['Location', 'Checklist', 'Deadline'];
-
-// List choiceIcon2 = [icIdeas, icObstacle];
-
-// List choiceText2 = ['Ideas', 'Obstacles'];
-
-// List filterText = [
-//   'Aspect Ratio',
-//   'Type of Shot',
-//   'Camera Angle',
-//   'Camera Movement'
-// ];
-
 class TaskPanel extends StatelessWidget {
-  const TaskPanel({super.key});
+  const TaskPanel({super.key, required this.count});
+
+  final int count;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 645,
       width: 527,
       child: Stack(
         children: [
@@ -216,133 +202,7 @@ class TaskPanel extends StatelessWidget {
                     ),
                   ),
                   //expansion tile
-                  ExpansionTileGroup(
-                    children: [
-                      ExpansionTileWithoutBorderItem(
-                        title: Row(
-                          children: [
-                            widthBox(200),
-                            const TextWidget(
-                              color: colorWhite,
-                              text: 'Script Information',
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            widthBox(12),
-                            SvgPicture.asset(
-                              icDownArrow,
-                              height: 7,
-                            ),
-                          ],
-                        ),
-                        isDefaultVerticalPadding: false,
-                        border: const Border(
-                          top: BorderSide(color: colorLightBlue),
-                          bottom: BorderSide(color: colorLightBlue),
-                        ),
-                        isHasTrailing: false,
-                        iconColor: colorWhite,
-                        collapsedBackgroundColor: colorMediumBlue,
-                        tilePadding: const EdgeInsets.symmetric(vertical: 4),
-                        collapsedIconColor: colorWhite,
-                        children: const [],
-                      )
-                    ],
-                  ),
-                  //editors Heading
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 64,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 35,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom:
-                                          BorderSide(color: colorLightBlue))),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(icTime),
-                                  widthBox(6),
-                                  const TextWidget(
-                                    text: 'Time',
-                                    fontSize: 11,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Time Picker Space
-                            const CustomTextField(),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 272,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 35,
-                              padding: const EdgeInsets.only(left: 10),
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(color: colorLightBlue),
-                                  left: BorderSide(color: colorLightBlue),
-                                  right: BorderSide(color: colorLightBlue),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(icScript),
-                                  widthBox(6),
-                                  const TextWidget(
-                                    text: 'Script',
-                                    fontSize: 11,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const CustomTextField(),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 172,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 35,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                bottom: BorderSide(color: colorLightBlue),
-                              )),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(icVisual),
-                                  widthBox(6),
-                                  const TextWidget(
-                                    text: 'Visual Explanation',
-                                    fontSize: 11,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const CustomTextField(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  //editors
-                  // Row(
-                  //   children: [TextField()],
-                  // )
+                  const CustomExpansionPanel(),
                 ],
               ),
             ),
@@ -352,11 +212,11 @@ class TaskPanel extends StatelessWidget {
             top: 0,
             child: Row(
               children: [
-                // counter(),
+                TaskCounter(count: count),
                 widthBox(3),
-                // counter(),
+                const TaskCounter(count: 99),
                 widthBox(3),
-                // emptyCircle(),
+                const CustomCheckBox(),
               ],
             ),
           ),
@@ -365,101 +225,3 @@ class TaskPanel extends StatelessWidget {
     );
   }
 }
-
-// Widget counter() {
-//   return Container(
-//     padding: const EdgeInsets.all(4),
-//     decoration: BoxDecoration(
-//       color: colorMediumBlue,
-//       shape: BoxShape.circle,
-//       border: Border.all(color: colorLightBlue),
-//     ),
-//     child: const TextWidget(
-//       text: '0',
-//       fontSize: 11,
-//     ),
-//   );
-// }
-
-// Widget counter2() {
-//   return Container(
-//     padding: const EdgeInsets.all(3),
-//     decoration: BoxDecoration(
-//       color: colorMediumBlue,
-//       shape: BoxShape.circle,
-//       border: Border.all(color: colorLightBlue),
-//     ),
-//     child: const TextWidget(
-//       text: '0',
-//       fontSize: 10,
-//     ),
-//   );
-// }
-
-// Widget emptyCircle() {
-//   return Container(
-//     padding: const EdgeInsets.all(2),
-//     decoration: BoxDecoration(
-//       color: colorMediumBlue,
-//       shape: BoxShape.circle,
-//       border: Border.all(color: colorLightBlue),
-//     ),
-//     child: Container(
-//       padding: const EdgeInsets.all(4),
-//       decoration: BoxDecoration(
-//         color: colorMediumBlue,
-//         shape: BoxShape.circle,
-//         border: Border.all(color: colorLightBlue),
-//       ),
-//     ),
-//   );
-// }
-
-// Widget choiceBox({required String icon, required String text}) {
-//   return Container(
-//     margin: const EdgeInsets.only(left: 9, top: 5),
-//     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-//     decoration: BoxDecoration(
-//       color: colorMediumBlue,
-//       border: Border.all(color: colorLightBlue, width: 1),
-//       borderRadius: BorderRadius.circular(4),
-//     ),
-//     child: Row(
-//       children: [
-//         SvgPicture.asset(icon),
-//         widthBox(6),
-//         TextWidget(
-//           text: text,
-//           fontSize: 11,
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
-// Widget choiceBox2({required String icon, required String text}) {
-//   return Stack(
-//     children: [
-//       Container(
-//         margin: const EdgeInsets.only(right: 12, top: 15, bottom: 10),
-//         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-//         decoration: BoxDecoration(
-//           color: colorMediumBlue,
-//           border: Border.all(color: colorLightBlue, width: 1),
-//           borderRadius: BorderRadius.circular(4),
-//         ),
-//         child: Row(
-//           children: [
-//             SvgPicture.asset(icon),
-//             widthBox(6),
-//             TextWidget(
-//               text: text,
-//               fontSize: 11,
-//             ),
-//           ],
-//         ),
-//       ),
-//       Positioned(right: 3, top: 0, child: counter2())
-//     ],
-//   );
-// }

@@ -11,16 +11,21 @@ class BodyList extends StatefulWidget {
 }
 
 class _BodyListState extends State<BodyList> {
-  int length = 1;
+  List<Widget> tasks = [];
+
+  @override
+  void initState() {
+    tasks.add(const TaskPanel(count: 1));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
         SingleChildScrollView(
-          child: Wrap(
-            children: List.generate(length, (index) => const TaskPanel()),
-          ),
+          child: Wrap(children: tasks),
         ),
         Positioned(
           right: 0,
@@ -29,7 +34,7 @@ class _BodyListState extends State<BodyList> {
             onPressed: () {
               if (mounted) {
                 setState(() {
-                  length++;
+                  tasks.insert(0, TaskPanel(count: tasks.length + 1));
                 });
               }
             },

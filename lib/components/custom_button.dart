@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:web_duplicate_app/components/text_widget.dart';
@@ -63,8 +65,9 @@ class LeftPanelButtons extends StatelessWidget {
 }
 
 class ExpandedButton extends StatelessWidget {
-  const ExpandedButton({super.key, this.onPressed});
+  const ExpandedButton({super.key, this.onPressed, required this.isExpanded});
   final VoidCallback? onPressed;
+  final bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +83,10 @@ class ExpandedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        child: SvgPicture.asset(icRightArrow),
+        child: Transform.rotate(
+          angle: isExpanded ? pi / 1 : 0,
+          child: SvgPicture.asset(icRightArrow),
+        ),
       ),
     );
   }
