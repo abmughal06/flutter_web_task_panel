@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:web_duplicate_app/constants.dart';
 
 class TextWidget extends StatelessWidget {
@@ -12,7 +13,6 @@ class TextWidget extends StatelessWidget {
   final TextOverflow? textOverflow;
   final int? maxLines;
   final double? textHeight;
-  final TextStyle? textStyle;
   final TextDecoration? decoration;
   final List<Shadow>? shadow;
 
@@ -28,7 +28,6 @@ class TextWidget extends StatelessWidget {
       this.textOverflow,
       this.maxLines,
       this.textHeight,
-      this.textStyle,
       this.decoration,
       this.shadow});
 
@@ -44,17 +43,15 @@ class TextWidget extends StatelessWidget {
         overflow: textOverflow,
 
         // softWrap: true,
-        style: textStyle ??
-            TextStyle(
-              shadows: shadow,
-              color: color,
-              height: textHeight,
-              fontSize: fontSize ?? 14,
-              letterSpacing: letterSpacing,
-              decoration: decoration,
-              fontFamily: 'Inter',
-              fontWeight: fontWeight,
-            ),
+        style: GoogleFonts.inter(
+          shadows: shadow,
+          color: color,
+          height: textHeight,
+          fontSize: fontSize ?? 14,
+          letterSpacing: letterSpacing,
+          decoration: decoration,
+          fontWeight: fontWeight,
+        ),
       ),
     );
   }

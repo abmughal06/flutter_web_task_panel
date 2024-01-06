@@ -13,9 +13,9 @@ class CustomExpansionPanel extends StatefulWidget {
 }
 
 class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
-  double height = 226;
+  late double height;
 
-  bool isPanelOpen = true;
+  bool isPanelOpen = false;
 
   togglePanelHeight() {
     if (isPanelOpen) {
@@ -25,6 +25,12 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
     }
     isPanelOpen = !isPanelOpen;
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    height = 24;
+    super.initState();
   }
 
   @override

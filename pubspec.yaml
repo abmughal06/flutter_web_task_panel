@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.9
   dropdown_button2: ^2.3.9
   expansion_tile_group: ^1.2.4
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

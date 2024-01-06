@@ -34,7 +34,7 @@ class _BodyListState extends State<BodyList> {
             onPressed: () {
               if (mounted) {
                 setState(() {
-                  tasks.insert(0, TaskPanel(count: tasks.length + 1));
+                  tasks.add(TaskPanel(count: tasks.length + 1));
                 });
               }
             },

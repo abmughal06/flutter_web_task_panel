@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:web_duplicate_app/components/empty_box.dart';
 import 'package:web_duplicate_app/components/text_widget.dart';
 import 'package:web_duplicate_app/constants.dart';
@@ -47,7 +48,7 @@ class CustomDropDown extends StatelessWidget {
               ],
             ),
           ),
-          style: const TextStyle(color: colorWhite),
+          style: GoogleFonts.inter(color: colorWhite),
           dropdownStyleData: const DropdownStyleData(
               decoration: BoxDecoration(color: colorMediumBlue)),
         ),
