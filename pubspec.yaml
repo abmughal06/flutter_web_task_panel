@@ -39,6 +39,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   expansion_tile_group: ^1.2.4
   google_fonts: ^6.1.0
+  appflowy_editor: ^2.2.0
 
 dev_dependencies:
   flutter_test:

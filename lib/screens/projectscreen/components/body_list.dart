@@ -47,7 +47,7 @@ class _BodyListState extends State<BodyList> {
               child: SvgPicture.asset(icAdd),
             ),
           ),
-        )
+        ),
       ],
     );
   }

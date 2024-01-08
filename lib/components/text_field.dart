@@ -1,3 +1,4 @@
+import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web_duplicate_app/constants.dart';
@@ -28,6 +29,19 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomTextEditor extends StatelessWidget {
+  const CustomTextEditor({super.key, required this.editorState});
+
+  final EditorState editorState;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppFlowyEditor(
+      editorState: editorState,
     );
   }
 }

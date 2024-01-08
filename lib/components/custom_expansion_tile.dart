@@ -1,5 +1,8 @@
+import 'package:appflowy_editor/appflowy_editor.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:web_duplicate_app/components/empty_box.dart';
 import 'package:web_duplicate_app/components/text_field.dart';
 import 'package:web_duplicate_app/components/text_widget.dart';
@@ -32,6 +35,9 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
     height = 24;
     super.initState();
   }
+
+  final scriptState = EditorState.blank();
+  final visualState = EditorState.blank();
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +92,25 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
                       tableHeading(icon: icVisual, text: 'Visual Explanation')
                     ],
                   ),
-                  const TableRow(
+                  TableRow(
                     children: [
-                      CustomTextField(),
-                      CustomTextField(),
-                      CustomTextField(),
+                      const CustomTextField(),
+                      SizedBox(
+                        height: 165,
+                        width: 200,
+                        child: AppFlowyEditor(
+                          editorState: scriptState,
+                          editorStyle: customizeEditorStyle(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 165,
+                        width: 200,
+                        child: AppFlowyEditor(
+                          editorState: visualState,
+                          editorStyle: customizeEditorStyle(),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -116,5 +136,53 @@ Widget tableHeading({required String icon, required String text}) {
         )
       ],
     ),
+  );
+}
+
+EditorStyle customizeEditorStyle() {
+  return EditorStyle(
+    padding: const EdgeInsets.all(8),
+    cursorColor: colorLightBlue,
+    dragHandleColor: colorLightBlue,
+    selectionColor: colorLightBlue.withOpacity(0.5),
+    textStyleConfiguration: TextStyleConfiguration(
+      text: GoogleFonts.inter(
+        fontSize: 14.0,
+        color: Colors.white,
+      ),
+      bold: const TextStyle(
+        fontWeight: FontWeight.w900,
+      ),
+      href: TextStyle(
+        color: Colors.amber,
+        decoration: TextDecoration.combine(
+          [
+            TextDecoration.overline,
+            TextDecoration.underline,
+          ],
+        ),
+      ),
+      code: const TextStyle(
+        fontSize: 14.0,
+        fontStyle: FontStyle.italic,
+        color: colorLightBlueShade2,
+        backgroundColor: Colors.black12,
+      ),
+    ),
+    textSpanDecorator: (context, node, index, text, before, _) {
+      final attributes = text.attributes;
+      final href = attributes?[AppFlowyRichTextKeys.href];
+      if (href != null) {
+        return TextSpan(
+          text: text.text,
+          style: before.style,
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              debugPrint('onTap: $href');
+            },
+        );
+      }
+      return before;
+    },
   );
 }
