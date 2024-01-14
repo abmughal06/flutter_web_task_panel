@@ -38,6 +38,8 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
 
   final scriptState = EditorState.blank();
   final visualState = EditorState.blank();
+  final scriptFocus = FocusNode();
+  final visualFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +97,8 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
                   TableRow(
                     children: [
                       const CustomTextField(),
+                      // const CustomTextField(),
+                      // const CustomTextField(),
                       SizedBox(
                         height: 165,
                         width: 200,
@@ -106,9 +110,17 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
                       SizedBox(
                         height: 165,
                         width: 200,
-                        child: AppFlowyEditor(
-                          editorState: visualState,
-                          editorStyle: customizeEditorStyle(),
+                        child: TapRegion(
+                          onTapOutside: (event) {
+                            setState(() {
+                              visualFocus.unfocus();
+                            });
+                          },
+                          child: AppFlowyEditor(
+                            focusNode: visualFocus,
+                            editorState: visualState,
+                            editorStyle: customizeEditorStyle(),
+                          ),
                         ),
                       ),
                     ],

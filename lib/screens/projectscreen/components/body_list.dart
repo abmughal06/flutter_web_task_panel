@@ -13,10 +13,13 @@ class BodyList extends StatefulWidget {
 class _BodyListState extends State<BodyList> {
   List<Widget> tasks = [];
 
+  late ScrollController scrollController;
+
   @override
   void initState() {
-    tasks.add(const TaskPanel(count: 1));
     super.initState();
+    scrollController = ScrollController();
+    tasks.add(const TaskPanel(count: 1));
   }
 
   @override
@@ -25,6 +28,8 @@ class _BodyListState extends State<BodyList> {
       fit: StackFit.expand,
       children: [
         SingleChildScrollView(
+          controller: scrollController,
+          physics: const BouncingScrollPhysics(),
           child: Wrap(children: tasks),
         ),
         Positioned(
